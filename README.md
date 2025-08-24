@@ -25,8 +25,8 @@ Afterwards, deploy traefik using traefik provider as main provider:
 ```yaml
 providers:
   http:
-      endpoint: "http://bridge.traefik.traefik-provider.private"    
-      pollInterval: "1s"
+    endpoint: "http://bridge.traefik.traefik-provider.private"    
+    pollInterval: "1s"
     
 entryPoints:
   web:
