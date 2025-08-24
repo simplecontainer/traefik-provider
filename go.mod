@@ -6,8 +6,6 @@ toolchain go1.24.5
 
 replace github.com/abbot/go-http-auth => github.com/abbot/go-http-auth v0.4.0
 
-replace github.com/simplecontainer/smr => ../smr
-
 require (
 	github.com/fatih/color v1.18.0
 	github.com/gin-gonic/gin v1.10.0
