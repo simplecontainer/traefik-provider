@@ -11,7 +11,7 @@ require (
 	github.com/gin-gonic/gin v1.10.0
 	github.com/manifoldco/promptui v0.9.0
 	github.com/mitchellh/mapstructure v1.5.0
-	github.com/simplecontainer/smr v0.0.0-00010101000000-000000000000
+	github.com/simplecontainer/smr v0.1.55
 	github.com/spf13/pflag v1.0.6
 	github.com/spf13/viper v1.18.2
 	github.com/traefik/traefik/v3 v3.5.0
