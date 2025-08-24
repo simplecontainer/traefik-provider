@@ -1,4 +1,4 @@
-name: Release proxy-manager
+name: Release traefik-provider
 
 on:
   push:
