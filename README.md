@@ -67,4 +67,6 @@ spec:
 Using this custom resource you can apply traefik dynamic configuration. It follows the same syntax as [file provider](https://doc.traefik.io/traefik/providers/file/).
 
 This example will load balance requests to docker containers on the all nodes if domain is from cluster network eg. `cluster.nginx.nginx.private`. 
+`cluster.group.name.private` is headless domain (return IP addresses of all replicas).
+
 Traefik will use simplecontainer node DNS and forward requests correctly even if container is running on another node.
