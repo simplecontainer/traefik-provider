@@ -3,7 +3,6 @@ package traefik
 import (
 	"context"
 	"fmt"
-	"github.com/simplecontainer/smr/pkg/configuration"
 	"github.com/simplecontainer/smr/pkg/logger"
 	"github.com/simplecontainer/traefik-provider/pkg/kinds"
 	clientv3 "go.etcd.io/etcd/client/v3"
@@ -19,7 +18,7 @@ type EtcdProvider struct {
 func NewEtcdProvider(endpoint string, prefix string) (*EtcdProvider, error) {
 	client, err := clientv3.New(clientv3.Config{
 		Endpoints:   []string{endpoint},
-		DialTimeout: configuration.Timeout.EtcdConnectionTimeout,
+		DialTimeout: 10,
 	})
 
 	if err != nil {
