@@ -3,7 +3,7 @@ cd "$(dirname "$0")" || exit 1
 cd ../../
 
 echo "Doing work in directory $PWD"
-source meta.sh
+source scripts/development/meta.sh
 
 IMAGE_NAME=${BINARY}
 

@@ -3,10 +3,11 @@ package provider
 import (
 	"context"
 	"dario.cat/mergo"
-	"github.com/mitchellh/mapstructure"
+	"encoding/json"
 	"github.com/simplecontainer/smr/pkg/logger"
 	"github.com/simplecontainer/traefik-provider/pkg/kinds"
 	"github.com/simplecontainer/traefik-provider/pkg/traefik"
+	"github.com/traefik/traefik/v3/pkg/config/dynamic"
 	"go.uber.org/zap"
 )
 
@@ -26,23 +27,28 @@ func (p *Provider) Watch() error {
 	return p.Provider.Watch(context.Background(), p.Mapper)
 }
 
-func (p *Provider) Reload() error {
-	return nil
-}
-
 func (p *Provider) Mapper(dynamicConfigurations []*kinds.Traefik) {
-	tmp := make(map[string]interface{})
+	if dynamicConfigurations == nil {
+		p.Config = &dynamic.Configuration{}
+	} else {
+		tmp := make(map[string]interface{})
 
-	for _, dynamicConfiguration := range dynamicConfigurations {
-		err := mergo.Merge(&tmp, dynamicConfiguration.Traefik)
+		for _, dynamicConfiguration := range dynamicConfigurations {
+			err := mergo.Merge(&tmp, dynamicConfiguration.Traefik)
 
-		if err != nil {
-			logger.Log.Error("failed to merge traefik configurations", zap.Error(err))
+			if err != nil {
+				logger.Log.Error("failed to merge traefik dynamic configurations", zap.Error(err))
+			}
 		}
-	}
 
-	err := mapstructure.Decode(tmp, p.Config)
-	if err != nil {
-		logger.Log.Error("failed to decode traefik configurations", zap.Error(err))
+		bytes, err := json.Marshal(tmp)
+		if err != nil {
+			logger.Log.Error("failed to marshal traefik dynamic configuration", zap.Error(err))
+		}
+
+		err = json.Unmarshal(bytes, p.Config)
+		if err != nil {
+			logger.Log.Error("failed to decode traefik dynamic configuration", zap.Error(err))
+		}
 	}
 }

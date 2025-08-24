@@ -43,7 +43,7 @@ func (e *EtcdProvider) GetServices(ctx context.Context) ([]*kinds.Traefik, error
 		return nil, fmt.Errorf("failed to get services from etcd: %w", err)
 	}
 
-	var configurations []*kinds.Traefik
+	var configurations []*kinds.Traefik = nil
 
 	for _, kv := range resp.Kvs {
 		config, err := kinds.New(kv.Value)
@@ -63,7 +63,6 @@ func (e *EtcdProvider) Watch(ctx context.Context, callback func([]*kinds.Traefik
 
 	for watchResp := range watchChan {
 		for _, event := range watchResp.Events {
-			fmt.Println(e.logger)
 			e.logger.Debug("etcd watch event", zap.String("type", event.Type.String()), zap.String("key", string(event.Kv.Key)))
 		}
 

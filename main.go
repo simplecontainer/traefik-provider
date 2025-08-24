@@ -25,6 +25,10 @@ func main() {
 	router := gin.New()
 	router.Use(gin.Recovery())
 
+	if logLevel == "DEBUG" {
+		router.Use(gin.Logger())
+	}
+
 	go func() {
 		err := api.Provider.Watch()
 		if err != nil {
@@ -51,7 +55,6 @@ func main() {
 		provider.GET("tls/options", api.HandleGetTLSOptions)
 
 		provider.GET("health", api.HandleHealth)
-		provider.POST("reload", api.HandleReload)
 	}
 
 	server := http.Server{

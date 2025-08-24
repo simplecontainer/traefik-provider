@@ -8,8 +8,8 @@ import (
 )
 
 func New() *Configuration {
-	pflag.String("provider-port", "7431", "Provider port")
-	pflag.String("endpoint", "node.private:2371", "Etcd endpoint")
+	pflag.String("provider-port", "80", "Provider port")
+	pflag.String("endpoint", "node.private:2379", "Etcd endpoint")
 	pflag.Parse()
 
 	viper.BindPFlags(pflag.CommandLine)
@@ -18,8 +18,8 @@ func New() *Configuration {
 	viper.BindEnv("provider-port", "PROVIDER_PORT")
 	viper.BindEnv("endpoint", "ENDPOINT")
 
-	viper.SetDefault("provider-port", "7431")
-	viper.SetDefault("endpoint", "node.private:2371")
+	viper.SetDefault("provider-port", "80")
+	viper.SetDefault("endpoint", "node.private:2379")
 
 	config := &Configuration{}
 	if err := viper.Unmarshal(config); err != nil {

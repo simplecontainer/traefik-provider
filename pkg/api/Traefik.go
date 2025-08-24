@@ -50,17 +50,7 @@ func (a *Api) HandleHealth(c *gin.Context) {
 	health := gin.H{
 		"status":    "healthy",
 		"timestamp": time.Now().UTC().Format(time.RFC3339),
-		"version":   "1.0.0",
 	}
 
 	c.JSON(http.StatusOK, health)
-}
-
-func (a *Api) HandleReload(c *gin.Context) {
-	response := gin.H{
-		"status":  "success",
-		"message": "Configuration reloaded",
-	}
-
-	c.JSON(http.StatusOK, response)
 }

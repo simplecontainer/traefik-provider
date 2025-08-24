@@ -15,6 +15,6 @@ echo "***********************************************"
 CGO_ENABLED=0 go build -ldflags '-s -w' || exit 1
 
 mkdir $BASE_DIR/${BINARY}-linux-amd64 || echo "$BASE_DIR/${BINARY}-amd64 already created"
-cp -f smr $BASE_DIR/${BINARY}-linux-amd64/${BINARY}
+cp -f ${BINARY} $BASE_DIR/${BINARY}-linux-amd64/${BINARY}
 
 cd "$BASE_DIR" || exit 1

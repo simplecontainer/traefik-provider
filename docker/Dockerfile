@@ -8,7 +8,7 @@ ARG TARGETARCH
 
 RUN adduser -D node && \
     mkdir -p /opt/${BINARY} /home/node/smr /home/node/.ssh && \
-    chown -R node /home/node /opt/smr && \
+    chown -R node /home/node /opt/${BINARY} && \
     touch /home/node/.ssh/known_hosts
 
 COPY ${BINARY}-${TARGETOS}-${TARGETARCH}/${BINARY} /opt/${BINARY}/${BINARY}
@@ -32,4 +32,4 @@ USER node
 
 EXPOSE 7431
 
-ENTRYPOINT ["/opt/${BINARY}/${BINARY}"]
+ENTRYPOINT ["/opt/traefik-provider/traefik-provider"]
