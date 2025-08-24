@@ -1,4 +1,4 @@
-name: Proxy manager CI/CD
+name: Traefik provider CI/CD
 
 on:
   push:
