@@ -17,7 +17,7 @@ spec:
   tag: "latest"
   replicas: 1
   ports:
-    - container: "7431"
+    - container: "80"
 ```
 
 Afterwards, deploy traefik using traefik provider as main provider:
